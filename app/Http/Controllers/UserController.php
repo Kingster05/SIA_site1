@@ -6,6 +6,7 @@ use Illuminate\Http\Response;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use App\Models\User;
+use DB;
 
 class UserController extends Controller
 {
@@ -35,6 +36,7 @@ class UserController extends Controller
         $rules = [
             'username' => 'required|max:20',
             'password' => 'required|max:20',
+            'gender' => 'required|in:Male,Female',
         ];
 
         $this->validate($request, $rules);
@@ -63,9 +65,9 @@ class UserController extends Controller
     public function update(Request $request,$id)
     {
         $rules = [
-        'username' => 'max:20',
-        'password' => 'max:20',
-        'gender' => 'in:Male,Female',
+        'username' => 'required|max:20',
+        'password' => 'required|max:20',
+        'gender' => 'required|in:Male,Female',
         ];
         $this->validate($request, $rules);
         $user = User::findOrFail($id);
