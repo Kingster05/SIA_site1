@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        // http not found
+        //http  not found
         if ($exception instanceof HttpException) {$code = $exception->getStatusCode();$message = Response::$statusTexts[$code];
         return $this->errorResponse($message, $code);
         }
@@ -68,8 +68,8 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidationException) {$errors = $exception->validator->errors()->getMessages();
         return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        // access to forbidden
-        if ($exception instanceof AuthorizationException) {
+        // access forbidden
+        if ($exception instanceof  AuthorizationException) {
         return $this->errorResponse($exception->getMessage(), Response::HTTP_FORBIDDEN);
         }
         // unauthorized access
